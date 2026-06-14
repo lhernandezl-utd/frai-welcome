@@ -160,7 +160,8 @@
   function el(html){var d=document.createElement('div');d.innerHTML=html;return d.firstChild;}
   function append(node){screen.appendChild(node);window.scrollTo(0,document.body.scrollHeight);}
   function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
-  function md(s){return esc(s).replace(/\*\*([^*]+)\*\*/g,'<b>$1</b>');}
+  function md(s){return esc(s).replace(/\*\*([^*]+)\*\*/g,'<b>$1</b>')
+    .replace(/([\w.+-]+@[\w-]+(?:\.[\w-]+)+)/g,'<a href="mailto:$1">$1</a>');}
   function sleep(ms){return new Promise(function(r){setTimeout(r, skipped?0:ms);});}
   function anchorId(k){return 'sec-'+k.replace(/[^A-Za-z0-9]/g,'');}
 
