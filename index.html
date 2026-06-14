@@ -74,6 +74,7 @@
 <script>
 (function(){
   "use strict";
+  if('scrollRestoration' in history){ history.scrollRestoration='manual'; }
   var screen=document.getElementById('screen');
   var reduce=window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
   var instant=reduce || /[?&](instant|static)=1/.test(location.search);
@@ -210,11 +211,12 @@
     var sec=document.createElement('section'); sec.id=anchorId(k);
     var h=document.createElement('h2'); h.className='sec'; h.textContent='> '+s.h; sec.appendChild(h);
     var b=document.createElement('div'); b.className='body'; b.innerHTML=md(s.b); sec.appendChild(b);
-    screen.appendChild(sec); window.scrollTo(0,document.body.scrollHeight);
+    screen.appendChild(sec);
   }
   function renderDossier(){
     renderNav(); KEYS.forEach(renderSection); footerLink();
     var sk=document.getElementById('skip'); if(sk) sk.style.display='none';
+    window.scrollTo(0,0);
   }
 
   document.getElementById('skip').addEventListener('click',function(){ skipped=true; });
