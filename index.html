@@ -185,7 +185,7 @@
         if(skipped){ target.innerHTML=target.dataset.base+' [##########] 100%'; return resolve(); }
         var n=Math.round(pct/10);
         target.innerHTML=target.dataset.base+' ['+Array(n+1).join('#')+Array(11-n).join('.')+'] '+pct+'%';
-        if(pct>=100){ return resolve(); } pct+=5; setTimeout(step,52);
+        if(pct>=100){ return resolve(); } pct+=5; setTimeout(step,72);
       })();
     });
   }
