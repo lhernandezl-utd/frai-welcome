@@ -171,7 +171,7 @@
       var i=0;(function step(){
         if(skipped){ target.innerHTML+=esc(text.slice(i)); window.scrollTo(0,document.body.scrollHeight); return resolve(); }
         if(i>=text.length){ return resolve(); }
-        var chunk=text.charCodeAt(i)===10?60:speed;
+        var chunk=text.charCodeAt(i)===10?26:speed;
         target.innerHTML+=esc(text[i]); i++; window.scrollTo(0,document.body.scrollHeight);
         setTimeout(step,chunk);
       })();
@@ -184,7 +184,7 @@
         if(skipped){ target.innerHTML=target.dataset.base+' [##########] 100%'; return resolve(); }
         var n=Math.round(pct/10);
         target.innerHTML=target.dataset.base+' ['+Array(n+1).join('#')+Array(11-n).join('.')+'] '+pct+'%';
-        if(pct>=100){ return resolve(); } pct+=10; setTimeout(step,70);
+        if(pct>=100){ return resolve(); } pct+=20; setTimeout(step,28);
       })();
     });
   }
@@ -229,12 +229,12 @@
     for(var i=0;i<BOOT.length;i++){
       var ln=BOOT[i];
       var node=el('<div class="line'+(ln.c?' '+ln.c:'')+'"></div>'); append(node);
-      if(ln.bar){ node.dataset.base=ln.t; await type(node,ln.t,11); await progressBar(node); }
-      else { await type(node,ln.t,10); }
-      await sleep(ln.t===''?40:110);
+      if(ln.bar){ node.dataset.base=ln.t; await type(node,ln.t,6); await progressBar(node); }
+      else { await type(node,ln.t,5); }
+      await sleep(ln.t===''?12:35);
     }
     append(el(TITLE));
-    var cr=el('<div class="line dim center" style="margin:.1em 0 .4em"></div>'); append(cr); await type(cr,CREDIT,8);
+    var cr=el('<div class="line dim center" style="margin:.1em 0 .4em"></div>'); append(cr); await type(cr,CREDIT,3);
     renderDossier();
   }
   function renderInstant(){
