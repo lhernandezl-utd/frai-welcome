@@ -5,19 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#000000">
 <title>FUTURE READY AI // UT Dallas</title>
-<meta name="description" content="UTD/Uplift: Future Ready AI Collaborative — a public, U.S. Dept. of Education-funded AI literacy project at UT Dallas with Uplift Education. PI: Dr. Gaurav Shekhar.">
+<meta name="description" content="UTD/Uplift: Future Ready AI Collaborative, a public, U.S. Dept. of Education funded AI literacy project at UT Dallas with Uplift Education. PI: Dr. Gaurav Shekhar.">
 <style>
   :root{ --green:#33ff77; --green-dim:#1ea34a; --green-fade:#0f6b32; --amber:#ffcf4d; --bg:#000600; }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;height:100%;background:var(--bg);}
   body{
     font-family:ui-monospace,"SF Mono",Menlo,Consolas,"DejaVu Sans Mono",monospace;
-    color:var(--green); font-size:clamp(13px,3.6vw,17px); line-height:1.5;
+    color:var(--green); font-size:clamp(13px,3.5vw,16.5px); line-height:1.55;
     -webkit-text-size-adjust:100%; overflow-x:hidden;
   }
   .crt{ position:relative;min-height:100%;
-    padding:max(16px,env(safe-area-inset-top)) clamp(14px,4vw,40px) 96px;
-    max-width:860px;margin:0 auto; text-shadow:0 0 4px rgba(51,255,119,.45);
+    padding:max(18px,env(safe-area-inset-top)) clamp(18px,5vw,40px) 100px;
+    max-width:760px;margin:0 auto; text-shadow:0 0 4px rgba(51,255,119,.45);
   }
   .crt::before{ content:"";position:fixed;inset:0;pointer-events:none;z-index:50;
     background:repeating-linear-gradient(to bottom,rgba(0,0,0,0) 0,rgba(0,0,0,0) 2px,rgba(0,0,0,.28) 3px,rgba(0,0,0,0) 4px);
@@ -29,23 +29,26 @@
 
   pre,.line,.body{white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;}
   .line{margin:0;}
+  .center{text-align:center;}
   .dim{color:var(--green-dim);} .fade{color:var(--green-fade);}
   .amber{color:var(--amber);text-shadow:0 0 5px rgba(255,207,77,.4);}
+  b{color:#bdffd2;font-weight:700;}
 
-  .title{ border:1px solid var(--green-dim);border-radius:6px; padding:.7em .8em;margin:.2em 0 .6em;
-    display:inline-block; letter-spacing:.18em;font-weight:700; box-shadow:0 0 14px rgba(51,255,119,.25) inset; }
+  .titlewrap{text-align:center;margin:.7em 0 .2em;}
+  .title{ display:inline-block;border:1px solid var(--green-dim);border-radius:6px;
+    padding:.7em 1em;letter-spacing:.18em;font-weight:700; box-shadow:0 0 14px rgba(51,255,119,.25) inset; }
   .title .t1{font-size:1.5em;display:block;}
-  .title .t2{font-size:.78em;color:var(--green-dim);letter-spacing:.32em;}
+  .title .t2{font-size:.78em;color:var(--green-dim);letter-spacing:.3em;}
 
   section{scroll-margin-top:14px;}
-  h2.sec{font-size:1.02em;letter-spacing:.16em;margin:1.4em 0 .25em;color:var(--amber);}
+  h2.sec{font-size:1.02em;letter-spacing:.14em;margin:1.5em 0 .3em;color:var(--amber);}
   .body{margin:.1em 0 .7em;}
 
-  #nav{margin:1.1em 0 .3em;}
-  #nav .hint{color:var(--green-dim);margin-bottom:.5em;}
-  .cmds{display:flex;flex-wrap:wrap;gap:.5em;}
+  #nav{margin:1.2em 0 .4em;}
+  #nav .hint{color:var(--green-dim);margin-bottom:.55em;text-align:center;}
+  .cmds{display:flex;flex-wrap:wrap;gap:.5em;justify-content:center;}
   .cmd{ appearance:none;cursor:pointer;font:inherit;color:var(--green);background:transparent;
-    border:1px solid var(--green-dim);border-radius:5px; padding:.5em .75em;min-height:42px;letter-spacing:.05em;
+    border:1px solid var(--green-dim);border-radius:5px; padding:.5em .8em;min-height:42px;letter-spacing:.05em;
     transition:background .12s,box-shadow .12s; }
   .cmd:hover,.cmd:focus{background:rgba(51,255,119,.12);box-shadow:0 0 10px rgba(51,255,119,.3);outline:none;}
 
@@ -59,6 +62,7 @@
     background:linear-gradient(to top,rgba(0,6,0,.96),rgba(0,6,0,.7)); border-top:1px solid var(--green-fade);
     color:var(--green-dim);font-size:.72em;letter-spacing:.04em; padding:.6em clamp(14px,4vw,40px);text-align:center; }
   a{color:var(--amber);}
+  .footlink{display:block;text-align:center;margin-top:1.6em;}
   @media (prefers-reduced-motion:reduce){ .crt::after{animation:none}.cursor{animation:none} }
 </style>
 </head>
@@ -76,77 +80,78 @@
   var skipped=false;
 
   var BOOT=[
-    {t:"UTD·JSOM TERMINAL", c:"dim"},
+    {t:"UTD·JSOM SECURE LINK", c:"dim"},
     {t:"FUTURE READY AI COLLABORATIVE", c:"dim"},
-    {t:"BIOS v2026.1   (c) UT Dallas", c:"fade"},
     {t:""},
-    {t:"> POST ............. OK"},
-    {t:"> K-16 pipeline .... OK"},
-    {t:"> AI literacy ...... grades 10-12"},
-    {t:"> Teacher training . OK"},
-    {t:"> Loading dossier ", bar:true},
-    {t:"READY.", c:"amber"},
+    {t:"> opening connection ..."},
+    {t:"> handshake ........ OK"},
+    {t:"> channel secured .. OK"},
+    {t:"> authenticating ... OK"},
+    {t:"> receiving dossier", bar:true},
+    {t:"CONNECTED.", c:"amber"},
     {t:""}
   ];
-  var TITLE='<div class="title"><span class="t1">FUTURE READY AI</span>'+
-            '<span class="t2">C O L L A B O R A T I V E</span></div>';
-  var CREDIT="A project of UT Dallas (Naveen Jindal School of Management) + Uplift Education.\n"+
-             "PI: Dr. Gaurav Shekhar · Funded by the U.S. Department of Education.";
+  var TITLE='<div class="titlewrap"><span class="title"><span class="t1">FUTURE READY AI</span>'+
+            '<span class="t2">C O L L A B O R A T I V E</span></span></div>';
+  var CREDIT="A project of UT Dallas (Naveen Jindal School of Management) and Uplift Education.\n"+
+             "PI: Dr. Gaurav Shekhar; funded by the U.S. Department of Education.";
   var FOOT_TEXT="Read the official announcement → news.utdallas.edu";
   var FOOT_URL="https://news.utdallas.edu/students-teaching/education-uplift-ai-grant-2026/";
 
   var SECTIONS={
     MISSION:{ h:"MISSION", nav:"MISSION",
       b:"Most students already use AI every day. Few use it well.\n"+
-        "This project builds one continuous path — from high school into the university — so "+
+        "This project builds one continuous path, from high school into the university, so "+
         "students arrive at college already knowing how to think, verify, and create with AI." },
     PROBLEM:{ h:"THE PROBLEM", nav:"PROBLEM",
       b:"AI is everywhere in students' lives, but few learn to use it well, and that gap follows "+
-        "them to college. The aim is to close it early — building real AI literacy in high school "+
-        "(grades 10-12) so students arrive college- and career-ready, instead of spending freshman "+
-        "year catching up." },
+        "them to college. The aim is to close it early, by building real AI literacy in high "+
+        "school (grades 10 to 12), so students arrive ready for college and career instead of "+
+        "spending freshman year catching up." },
     APPROACH:{ h:"THE APPROACH", nav:"APPROACH",
-      b:"We don't add another course. We weave AI literacy into the classes schools already teach, "+
-        "and we train the teachers who deliver it.\n"+
-        "University faculty vet the work, and a continuous design -> test -> adapt loop between "+
-        "UT Dallas and Uplift Education keeps the curriculum current as the technology shifts.\n"+
-        "The innovation is not a tool. It is the structure that connects high school and college." },
+      b:"We don't add another course. We weave AI literacy into the classes schools already "+
+        "teach, and we train the teachers who deliver it.\n"+
+        "University faculty vet the work, and a continuous loop of design, testing, and "+
+        "adaptation between UT Dallas and Uplift Education keeps the curriculum current as the "+
+        "technology shifts.\n"+
+        "The innovation is not a tool; it is the structure that connects high school and college." },
     "MY-ROLE":{ h:"MY ROLE ON THE GRANT", nav:"MY ROLE",
-      b:"As the Instructional AI Content Designer, I build two of the grant's pieces: the "+
-        "AI-literacy curriculum students learn from, and the professional development that "+
-        "prepares their teachers to deliver it.\n"+
-        "Day to day, that means turning standards and research into real lessons — the modules, "+
-        "the examples, the practice, and the way AI is woven into courses schools already teach. "+
+      b:"As the Instructional AI Content Designer, I build two of the grant's pieces: the AI "+
+        "literacy curriculum students learn from, and the professional development that prepares "+
+        "their teachers to deliver it.\n"+
+        "Day to day, that means turning standards and research into real lessons (the modules, "+
+        "the examples, the practice, and the way AI is woven into courses schools already teach). "+
         "Faculty experts vet the content; I shape it so it is accurate, teachable, and genuinely "+
         "useful in a classroom.\n"+
-        "The grant is led by Dr. Gaurav Shekhar at UT Dallas; my part is the content and the "+
+        "The grant is led by Dr. Gaurav Shekhar at UT Dallas; my part is the content, and the "+
         "craft of how it is taught." },
     WHOAMI:{ h:"WHO AM I", nav:"WHO AM I",
       b:"I'm an educator and instructional designer who has spent more than a decade where "+
         "language, learning, and technology meet.\n"+
-        "My background is in bilingual and second-language education and in scenario- and "+
-        "performance-based learning — the kind where people learn by doing, not just by reading. "+
-        "I've built AI-powered learning systems end to end, so I work comfortably in both the "+
+        "My background is in bilingual and second language education, and in scenario based and "+
+        "performance based learning (the kind where people learn by doing, not just by reading). "+
+        "I have built AI learning systems from end to end, so I work comfortably in both the "+
         "classroom and the code, and I'm completing doctoral research on AI in language learning.\n"+
         "What I care about: accuracy over hype, the teacher's judgment over automation, and "+
-        "learners who are too often underestimated. I design so technology amplifies good teaching "+
-        "instead of replacing it.\n"+
+        "learners who are too often underestimated. I design so that technology amplifies good "+
+        "teaching instead of replacing it.\n"+
         "That's what I bring to Future Ready AI." },
     SCOPE:{ h:"THE SCOPE", nav:"SCOPE",
-      b:"The work spans three fronts — curriculum that builds AI literacy, training for the teachers "+
-        "who deliver it, and smarter advising and retention — wired together so a student's progress "+
-        "carries from high school into college.\n"+
-        "A four-year effort, 2026 through 2029." },
+      b:"The work spans three fronts: curriculum that builds AI literacy, training for the "+
+        "teachers who deliver it, and smarter advising and retention, all wired together so a "+
+        "student's progress carries from high school into college.\n"+
+        "A four year effort, from 2026 through 2029." },
     ABOUT:{ h:"ABOUT THE GRANT", nav:"ABOUT",
-      b:"UTD/Uplift: Future Ready AI Collaborative.\n"+
-        "Principal Investigator: Dr. Gaurav Shekhar — Naveen Jindal School of Management, UT Dallas.\n"+
-        "A partnership of The University of Texas at Dallas and Uplift Education.\n"+
-        "Funded by the U.S. Department of Education, Office of Postsecondary Education — "+
-        "$4 million over four years (2026-2029)." },
+      b:"**UTD/Uplift:** Future Ready AI Collaborative.\n"+
+        "**Principal Investigator:** Dr. Gaurav Shekhar, Naveen Jindal School of Management, "+
+        "UT Dallas.\n"+
+        "**Partners:** The University of Texas at Dallas and Uplift Education.\n"+
+        "**Funding:** U.S. Department of Education, Office of Postsecondary Education; $4 million "+
+        "over four years (2026 to 2029)." },
     CONTACT:{ h:"CONTACT", nav:"CONTACT",
       b:"Luis Hernández-Ledezma\n"+
         "Instructional AI Content Designer\n"+
-        "Naveen Jindal School of Management · UT Dallas\n"+
+        "Naveen Jindal School of Management (UT Dallas)\n"+
         "Luis.HernandezLedezma@UTDallas.edu" }
   };
   var KEYS=["MISSION","PROBLEM","APPROACH","MY-ROLE","WHOAMI","SCOPE","ABOUT","CONTACT"];
@@ -154,6 +159,7 @@
   function el(html){var d=document.createElement('div');d.innerHTML=html;return d.firstChild;}
   function append(node){screen.appendChild(node);window.scrollTo(0,document.body.scrollHeight);}
   function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+  function md(s){return esc(s).replace(/\*\*([^*]+)\*\*/g,'<b>$1</b>');}
   function sleep(ms){return new Promise(function(r){setTimeout(r, skipped?0:ms);});}
   function anchorId(k){return 'sec-'+k.replace(/[^A-Za-z0-9]/g,'');}
 
@@ -182,10 +188,8 @@
   }
   function footerLink(){
     var a=document.createElement('a');
-    a.className='line fade'; a.style.marginTop='1.5em'; a.style.display='inline-block';
-    a.href=FOOT_URL; a.target='_blank'; a.rel='noopener'; a.textContent=FOOT_TEXT;
+    a.className='footlink fade'; a.href=FOOT_URL; a.target='_blank'; a.rel='noopener'; a.textContent=FOOT_TEXT;
     screen.appendChild(a);
-    return a;
   }
   function renderNav(){
     var nav=el('<div id="nav"><div class="hint">▸ jump to:</div><div class="cmds"></div></div>');
@@ -205,13 +209,11 @@
     var s=SECTIONS[k];
     var sec=document.createElement('section'); sec.id=anchorId(k);
     var h=document.createElement('h2'); h.className='sec'; h.textContent='> '+s.h; sec.appendChild(h);
-    var b=document.createElement('div'); b.className='body'; b.textContent=s.b; sec.appendChild(b);
+    var b=document.createElement('div'); b.className='body'; b.innerHTML=md(s.b); sec.appendChild(b);
     screen.appendChild(sec); window.scrollTo(0,document.body.scrollHeight);
   }
   function renderDossier(){
-    renderNav();
-    KEYS.forEach(renderSection);
-    footerLink();
+    renderNav(); KEYS.forEach(renderSection); footerLink();
     var sk=document.getElementById('skip'); if(sk) sk.style.display='none';
   }
 
@@ -224,22 +226,21 @@
     for(var i=0;i<BOOT.length;i++){
       var ln=BOOT[i];
       var node=el('<div class="line'+(ln.c?' '+ln.c:'')+'"></div>'); append(node);
-      if(ln.bar){ node.dataset.base=ln.t; await type(node,ln.t,10); await progressBar(node); }
-      else { await type(node,ln.t,9); }
-      await sleep(ln.t===''?40:90);
+      if(ln.bar){ node.dataset.base=ln.t; await type(node,ln.t,11); await progressBar(node); }
+      else { await type(node,ln.t,10); }
+      await sleep(ln.t===''?40:110);
     }
     append(el(TITLE));
-    var cr=el('<div class="line dim" style="margin:.1em 0 .4em"></div>'); append(cr); await type(cr,CREDIT,8);
+    var cr=el('<div class="line dim center" style="margin:.1em 0 .4em"></div>'); append(cr); await type(cr,CREDIT,8);
     renderDossier();
   }
-
   function renderInstant(){
     BOOT.forEach(function(ln){
       var node=el('<div class="line'+(ln.c?' '+ln.c:'')+'"></div>');
       node.textContent=ln.t+(ln.bar?' [##########] 100%':''); append(node);
     });
     append(el(TITLE));
-    var cr=el('<div class="line dim" style="margin:.1em 0 .4em"></div>'); cr.textContent=CREDIT; append(cr);
+    var cr=el('<div class="line dim center" style="margin:.1em 0 .4em"></div>'); cr.textContent=CREDIT; append(cr);
     renderDossier();
   }
 
