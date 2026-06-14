@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#000000">
+<title>FUTURE READY AI // UT Dallas</title>
+<meta name="description" content="UTD/Uplift: Future Ready AI Collaborative — a public, U.S. Dept. of Education-funded AI literacy project at UT Dallas with Uplift Education. PI: Dr. Gaurav Shekhar.">
+<style>
+  :root{
+    --green:#33ff77; --green-dim:#1ea34a; --green-fade:#0f6b32;
+    --amber:#ffcf4d; --bg:#000600;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;height:100%;background:var(--bg);}
+  body{
+    font-family:ui-monospace,"SF Mono",Menlo,Consolas,"DejaVu Sans Mono",monospace;
+    color:var(--green);
+    font-size:clamp(13px,3.6vw,17px);
+    line-height:1.5;
+    -webkit-text-size-adjust:100%;
+    overflow-x:hidden;
+  }
+  .crt{
+    position:relative;min-height:100%;
+    padding:max(16px,env(safe-area-inset-top)) clamp(14px,4vw,40px) 96px;
+    max-width:860px;margin:0 auto;
+    text-shadow:0 0 4px rgba(51,255,119,.45);
+  }
+  .crt::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:50;
+    background:repeating-linear-gradient(to bottom,rgba(0,0,0,0) 0,rgba(0,0,0,0) 2px,rgba(0,0,0,.28) 3px,rgba(0,0,0,0) 4px);
+    mix-blend-mode:multiply;
+  }
+  .crt::after{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:51;
+    background:radial-gradient(120% 120% at 50% 50%,rgba(0,0,0,0) 60%,rgba(0,0,0,.55) 100%);
+    animation:flicker 4s infinite steps(60);
+  }
+  @keyframes flicker{0%,100%{opacity:.92}50%{opacity:1}}
+
+  pre,.line,.body{white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;}
+  .line{margin:0;}
+  .dim{color:var(--green-dim);}
+  .fade{color:var(--green-fade);}
+  .amber{color:var(--amber);text-shadow:0 0 5px rgba(255,207,77,.4);}
+
+  .title{
+    border:1px solid var(--green-dim);border-radius:6px;
+    padding:.7em .8em;margin:.2em 0 .6em;display:inline-block;
+    letter-spacing:.18em;font-weight:700;
+    box-shadow:0 0 14px rgba(51,255,119,.25) inset;
+  }
+  .title .t1{font-size:1.5em;display:block;}
+  .title .t2{font-size:.78em;color:var(--green-dim);letter-spacing:.32em;}
+
+  h2.sec{font-size:1em;letter-spacing:.16em;margin:1.3em 0 .2em;color:var(--amber);}
+  .body{margin:.1em 0 .6em;}
+
+  #menu{margin:1.1em 0 .4em;display:none;}
+  #menu .hint{color:var(--green-dim);margin-bottom:.5em;}
+  .cmds{display:flex;flex-wrap:wrap;gap:.5em;}
+  .cmd{
+    appearance:none;cursor:pointer;font:inherit;color:var(--green);background:transparent;
+    border:1px solid var(--green-dim);border-radius:5px;
+    padding:.55em .8em;min-height:44px;letter-spacing:.06em;
+    transition:background .12s,box-shadow .12s;
+  }
+  .cmd:hover,.cmd:focus{background:rgba(51,255,119,.12);box-shadow:0 0 10px rgba(51,255,119,.3);outline:none;}
+  .cmd .pre{color:var(--green-dim);}
+
+  .cursor{display:inline-block;width:.62em;height:1.05em;background:var(--green);
+    margin-left:2px;transform:translateY(.18em);animation:blink 1s steps(1) infinite;}
+  @keyframes blink{50%{opacity:0}}
+
+  #skip{
+    position:fixed;top:10px;right:12px;z-index:60;font:inherit;font-size:.8em;
+    color:var(--green-dim);background:rgba(0,0,0,.5);
+    border:1px solid var(--green-fade);border-radius:4px;padding:.35em .6em;cursor:pointer;
+  }
+  #status{
+    position:fixed;left:0;right:0;bottom:0;z-index:55;
+    background:linear-gradient(to top,rgba(0,6,0,.96),rgba(0,6,0,.7));
+    border-top:1px solid var(--green-fade);
+    color:var(--green-dim);font-size:.72em;letter-spacing:.04em;
+    padding:.6em clamp(14px,4vw,40px);text-align:center;
+  }
+  a{color:var(--amber);}
+  @media (prefers-reduced-motion:reduce){ .crt::after{animation:none}.cursor{animation:none} }
+</style>
+</head>
+<body>
+<button id="skip" aria-label="Skip intro">SKIP ▸</button>
+<main class="crt"><div id="screen" aria-live="polite"></div></main>
+<div id="status">UTD/UPLIFT · FUTURE READY AI COLLABORATIVE · U.S. DEPT. OF EDUCATION</div>
+
+<script>
+(function(){
+  "use strict";
+  var screen = document.getElementById('screen');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var instant = reduce || /[?&](instant|static)=1/.test(location.search);
+  var skipped = false;
+
+  // ---- CONTENT (edit here; mirrored in CONTENT.md) ----
+  var BOOT = [
+    {t:"UTD·JSOM TERMINAL", c:"dim"},
+    {t:"FUTURE READY AI COLLABORATIVE", c:"dim"},
+    {t:"BIOS v2026.1   (c) UT Dallas", c:"fade"},
+    {t:""},
+    {t:"> POST ............. OK"},
+    {t:"> K-16 pipeline .... OK"},
+    {t:"> AI literacy ...... grades 10-12"},
+    {t:"> Teacher training . OK"},
+    {t:"> Advising + retention  OK"},
+    {t:"> Mission brief ...", bar:true},
+    {t:"READY.", c:"amber"},
+    {t:""}
+  ];
+
+  var TITLE = '<div class="title"><span class="t1">FUTURE READY AI</span>'+
+              '<span class="t2">C O L L A B O R A T I V E</span></div>';
+
+  var CREDIT = "A project of UT Dallas (Naveen Jindal School of Management) + Uplift Education.\n"+
+               "PI: Dr. Gaurav Shekhar · Funded by the U.S. Department of Education.";
+
+  var FOOT_TEXT = "Read the official announcement → news.utdallas.edu";
+  var FOOT_URL  = "https://news.utdallas.edu/students-teaching/education-uplift-ai-grant-2026/";
+
+  var SECTIONS = {
+    MISSION: {
+      h:"MISSION",
+      b:"Most students already use AI every day. Few use it well.\n"+
+        "This project builds one continuous path — from high school into the university — so "+
+        "students arrive at college already knowing how to think, verify, and create with AI."
+    },
+    PROBLEM: {
+      h:"THE PROBLEM",
+      b:"AI is everywhere in students' lives, but few learn to use it well, and that gap follows "+
+        "them to college. The aim is to close it early — building real AI literacy in high school "+
+        "(grades 10-12) so students arrive college- and career-ready, instead of spending freshman "+
+        "year catching up."
+    },
+    APPROACH: {
+      h:"THE APPROACH",
+      b:"We don't add another course. We weave AI literacy into the classes schools already teach, "+
+        "and we train the teachers who deliver it.\n"+
+        "University faculty vet the work, and a continuous design -> test -> adapt loop between "+
+        "UT Dallas and Uplift Education keeps the curriculum current as the technology shifts.\n"+
+        "The innovation is not a tool. It is the structure that connects high school and college."
+    },
+    "MY-ROLE": {
+      h:"MY ROLE",
+      b:"I'm one of the people building it. As the Instructional AI Content Designer, I design the "+
+        "AI-literacy curriculum and the teacher development behind it — turning research on "+
+        "language, learning, and AI into modules teachers can run and students can use.\n"+
+        "I come from bilingual and second-language education, instructional design, and a decade of "+
+        "building AI-powered learning systems. I design for accuracy first, for the teacher's "+
+        "judgment always, and for students who deserve to arrive ready.\n"+
+        "The grant is led by Dr. Gaurav Shekhar at UT Dallas; I'm proud to contribute the content "+
+        "and design craft."
+    },
+    SCOPE: {
+      h:"THE SCOPE",
+      b:"The work spans three fronts — curriculum that builds AI literacy, training for the teachers "+
+        "who deliver it, and smarter advising and retention — wired together so a student's progress "+
+        "carries from high school into college.\n"+
+        "A four-year effort, 2026 through 2029."
+    },
+    ABOUT: {
+      h:"ABOUT THE GRANT",
+      b:"UTD/Uplift: Future Ready AI Collaborative.\n"+
+        "Principal Investigator: Dr. Gaurav Shekhar — Naveen Jindal School of Management, UT Dallas.\n"+
+        "A partnership of The University of Texas at Dallas and Uplift Education.\n"+
+        "Funded by the U.S. Department of Education, Office of Postsecondary Education — "+
+        "$4 million over four years (2026-2029)."
+    },
+    CONTACT: {
+      h:"CONTACT",
+      b:"Luis Hernández-Ledezma\n"+
+        "Instructional AI Content Designer\n"+
+        "Naveen Jindal School of Management · UT Dallas\n"+
+        "Luis.HernandezLedezma@UTDallas.edu"
+    }
+  };
+  var ORDER = ["PROBLEM","APPROACH","MY-ROLE","SCOPE","ABOUT","CONTACT"]; // MISSION auto-runs
+  // ------------------------------------------------------------------
+
+  function el(html){var d=document.createElement('div');d.innerHTML=html;return d.firstChild;}
+  function append(node){screen.appendChild(node);window.scrollTo(0,document.body.scrollHeight);}
+  function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+  function sleep(ms){return new Promise(function(r){setTimeout(r, skipped?0:ms);});}
+
+  function footerLink(){
+    var a=document.createElement('a');
+    a.className='line fade'; a.style.marginTop='1.4em'; a.style.display='block';
+    a.href=FOOT_URL; a.target='_blank'; a.rel='noopener';
+    a.textContent=FOOT_TEXT;
+    return a;
+  }
+
+  function type(target, text, speed){
+    return new Promise(function(resolve){
+      if(instant || skipped){ target.innerHTML += esc(text); resolve(); return; }
+      var i=0;
+      (function step(){
+        if(skipped){ target.innerHTML += esc(text.slice(i)); window.scrollTo(0,document.body.scrollHeight); return resolve(); }
+        if(i>=text.length){ return resolve(); }
+        var chunk = text.charCodeAt(i)===10 ? 60 : speed;
+        target.innerHTML += esc(text[i]); i++;
+        window.scrollTo(0,document.body.scrollHeight);
+        setTimeout(step, chunk);
+      })();
+    });
+  }
+
+  function progressBar(target){
+    return new Promise(function(resolve){
+      if(instant||skipped){ target.innerHTML += ' [##########] 100%'; return resolve(); }
+      var pct=0;
+      (function step(){
+        if(skipped){ target.innerHTML = target.dataset.base+' [##########] 100%'; return resolve(); }
+        var n=Math.round(pct/10);
+        target.innerHTML = target.dataset.base+' ['+Array(n+1).join('#')+Array(11-n).join('.')+'] '+pct+'%';
+        if(pct>=100){ return resolve(); }
+        pct+=10; setTimeout(step, 70);
+      })();
+    });
+  }
+
+  async function printSection(key){
+    var s=SECTIONS[key]; if(!s) return;
+    var h=el('<h2 class="sec"></h2>'); append(h); await type(h,'> '+s.h, 14);
+    var b=el('<div class="body"></div>'); append(b); await type(b, s.b, 9);
+  }
+
+  function showMenu(){
+    var m=document.getElementById('menu');
+    if(m){ m.style.display='block'; return; }
+    m=el('<div id="menu"><div class="hint">▸ tap a command:</div><div class="cmds"></div></div>');
+    append(m);
+    var bar=m.querySelector('.cmds');
+    ORDER.concat(["RUN ALL"]).forEach(function(k){
+      var btn=el('<button class="cmd"><span class="pre">&gt; </span></button>');
+      btn.appendChild(document.createTextNode(k));
+      btn.addEventListener('click',function(){ runCommand(k); });
+      bar.appendChild(btn);
+    });
+    window.scrollTo(0,document.body.scrollHeight);
+  }
+
+  var busy=false;
+  async function runCommand(k){
+    if(busy){ skipped=true; return; }
+    busy=true; skipped=false;
+    var menu=document.getElementById('menu'); if(menu) menu.style.display='none';
+    var echo=el('<div class="line dim"></div>'); append(echo); echo.textContent='C:\\FRAI> '+k;
+    if(k==="RUN ALL"){ for(var i=0;i<ORDER.length;i++){ await printSection(ORDER[i]); } }
+    else { await printSection(k); }
+    busy=false; showMenu();
+  }
+
+  document.addEventListener('click',function(e){
+    if(e.target.id!=='skip' && !e.target.classList.contains('cmd') && e.target.tagName!=='A') skipped=true;
+  });
+  document.getElementById('skip').addEventListener('click',function(){ skipped=true; });
+
+  function renderAll(){
+    BOOT.forEach(function(ln){
+      var node=el('<div class="line'+(ln.c?' '+ln.c:'')+'"></div>');
+      node.textContent = ln.t + (ln.bar?' [##########] 100%':''); append(node);
+    });
+    append(el(TITLE));
+    var cr=el('<div class="line dim" style="margin:.1em 0 .6em"></div>'); cr.textContent=CREDIT; append(cr);
+    ["MISSION"].concat(ORDER).forEach(function(k){
+      var s=SECTIONS[k];
+      var h=el('<h2 class="sec"></h2>'); h.textContent='> '+s.h; append(h);
+      var b=el('<div class="body"></div>'); b.textContent=s.b; append(b);
+    });
+    append(footerLink());
+    var sk=document.getElementById('skip'); if(sk) sk.style.display='none';
+  }
+
+  async function boot(){
+    for(var i=0;i<BOOT.length;i++){
+      var ln=BOOT[i];
+      var node=el('<div class="line'+(ln.c?' '+ln.c:'')+'"></div>'); append(node);
+      if(ln.bar){ node.dataset.base=ln.t; await type(node, ln.t, 10); await progressBar(node); }
+      else { await type(node, ln.t, 9); }
+      await sleep(ln.t===''?40:90);
+    }
+    append(el(TITLE));
+    var cr=el('<div class="line dim" style="margin:.1em 0 .6em"></div>'); append(cr); await type(cr, CREDIT, 8);
+    skipped=false; busy=true;
+    await printSection("MISSION");
+    busy=false; showMenu();
+    append(footerLink());
+  }
+
+  if(instant){ renderAll(); } else { boot(); }
+})();
+</script>
+</body>
+</html>
